@@ -16,6 +16,8 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
     socket.on('request', (arg1, callback) => {
+        console.log(arg1);
+        
         callback({
             status: 'Success',
             message: 'Data Received'
