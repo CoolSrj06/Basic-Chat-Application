@@ -1,5 +1,5 @@
-import cluster from 'node:cluster';
-import { availableParallelism } from 'node:os';
+import cluster from "node:cluster";
+import { availableParallelism } from "node:os";
 
 export const setupPrimary = () => {
   //const numCPUs = availableParallelism();
