@@ -10,4 +10,11 @@ router.get('/', (req, res) => {
   res.sendFile(join(__dirname, '../public/index.html'));
 });
 
+router.get('/:cssFile.css', (req, res) => {
+  res.sendFile(join(__dirname, '../public/styles.css'));
+});
+router.get('/:script.js', (req, res) => {
+  res.sendFile(join(__dirname, '../public/script.js'));
+});
+
 export default router;

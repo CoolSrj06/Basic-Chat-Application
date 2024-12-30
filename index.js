@@ -7,3 +7,11 @@ if (cluster.isPrimary) {
 } else {
   setupWorker();
 }
+
+/**
+ * Think of the primary process as a manager and worker processes as employees:
+
+  The manager (primary) assigns tasks to employees (workers) and ensures everything runs smoothly.
+  The employees (workers) do the actual work, like serving customers or performing specific operations.
+
+ */
