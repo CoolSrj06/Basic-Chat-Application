@@ -6,6 +6,7 @@ export const setupPrimary = () => {
   //console.log(`${numCPUs} cores available.`);
 
   for (let i = 0; i < 1; i++) {
-    cluster.fork({ PORT: 3000 + i });
+    const port = process.env.PORT || 3000 + i;
+    cluster.fork({ PORT: port });
   }
 };
