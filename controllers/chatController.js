@@ -4,15 +4,14 @@ var dataStore = {
 };
 
 export const handleChatMessage = async (socket, db) => {
-  const updateOnlineUsers = () => {
-    socket.server.emit('onlineUsers', dataStore.list);
-  };
-  
   // Broadcast to all the users except the newly connected user
   socket.broadcast.emit('User Status', 'A new user has joined the chat!');
   console.log(`A user connected to ${socket.id}`);
   const fakeUserName = faker.internet.username()
   dataStore.list.push({sid: socket.id, username: fakeUserName}); 
+
+  // Display your current Username
+  socket.emit('myUsername', fakeUserName);
   
   // Handle online users
   socket.server.emit('onlineUsers', dataStore);
@@ -57,8 +56,6 @@ export const handleChatMessage = async (socket, db) => {
     if (index > -1) {
       dataStore.list.splice(index, 1);
     }
-    // Notify others about the disconnection
-    socket.broadcast.emit('User Status', 'A user has left the chat.');
     // Handle online users
     socket.server.emit('onlineUsers', dataStore);
   });

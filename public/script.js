@@ -9,6 +9,7 @@ const socket = io({
   retries: 3,
 });
 
+const myUsername = document.getElementById('username');
 const form = document.getElementById('form');
 const input = document.getElementById('input');
 const messages = document.getElementById('messages');
@@ -81,3 +82,7 @@ socket.on('onlineUsers', (dataStore) => {
     onlineUsers.appendChild(item);
   });
 });
+
+socket.on('myUsername', (fakeUserName) => {
+  myUsername.textContent = fakeUserName;
+})
