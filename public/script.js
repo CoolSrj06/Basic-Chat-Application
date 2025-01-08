@@ -13,6 +13,7 @@ const form = document.getElementById('form');
 const input = document.getElementById('input');
 const messages = document.getElementById('messages');
 const typing = document.getElementById('typing');
+const onlineUsers = document.getElementById('online-users');
 
 // Handle form submission
 form.addEventListener('submit', (e) => {
@@ -69,4 +70,14 @@ socket.on('typing', (msg) => {
   const typing = document.getElementById('typing');
   typing.textContent = msg || ''; // Clear the message if it's empty
   window.scrollTo(0, document.body.scrollHeight);
+});
+
+socket.on('onlineUsers', (dataStore) => {
+  console.log(dataStore);
+  onlineUsers.innerHTML = ''; // Clear the list of online users before updating it
+  dataStore.list.forEach(user => {
+    const item = document.createElement('li');
+    item.innerHTML = user.username;
+    onlineUsers.appendChild(item);
+  });
 });

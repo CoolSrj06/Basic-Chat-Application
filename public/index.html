@@ -6,8 +6,17 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <ul id="messages"></ul>
-    <ul id="typing"></ul>
+    <div class="row">
+      <div class="column left">
+        <ul id="messages"></ul>
+        <ul id="typing"></ul>
+      </div>
+      <div class="column right">
+        <h3>Online Users</h3>
+        <ul id="online-users"></ul>
+      </div>
+    </div>
+    
     <form id="form" action="">
       <input id="input" autocomplete="off" /><button>Send</button>
       <button id="toggle-btn">Disconnect</button>
