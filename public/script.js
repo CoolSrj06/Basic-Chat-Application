@@ -12,6 +12,7 @@ const socket = io({
 const form = document.getElementById('form');
 const input = document.getElementById('input');
 const messages = document.getElementById('messages');
+const typing = document.getElementById('typing');
 
 // Handle form submission
 form.addEventListener('submit', (e) => {
@@ -27,8 +28,9 @@ form.addEventListener('submit', (e) => {
 
 // Listen for chat messages
 socket.on('chat message', (msg, serverOffset) => {
+  typing.innerHTML = '';//Clear the typing indicator
   const item = document.createElement('li');
-  item.textContent = msg;
+  item.innerHTML = msg; 
   messages.appendChild(item);
   window.scrollTo(0, document.body.scrollHeight);
   socket.auth.serverOffset = serverOffset;
@@ -55,4 +57,16 @@ toggleButton.addEventListener('click', (e) => {
     toggleButton.innerText = 'Disconnect';
     socket.connect();
   }
+});
+
+
+input.addEventListener('keydown', function (event) {
+  socket.emit('typing'); // Notify the server that the user is typing
+});
+
+socket.on('typing', (msg) => {
+  // Update the typing indicator with the message received from the server
+  const typing = document.getElementById('typing');
+  typing.textContent = msg || ''; // Clear the message if it's empty
+  window.scrollTo(0, document.body.scrollHeight);
 });
